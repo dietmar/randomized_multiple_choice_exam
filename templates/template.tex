@@ -1,0 +1,24 @@
+\documentclass[a4wide]{article}
+
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\newlist{answerlist}{itemize}{2}
+\setlist[answerlist]{label=$\square$}
+
+\begin{document}
+
+{% for q in questions %}
+
+\section*{Question {{ q['idx'] }}}
+
+{{ q['question'] }}
+
+\begin{answerlist}
+    {% for a in q['answers'] %}
+    \item {{ a }}
+    {% endfor %}
+\end{answerlist}
+{% endfor %}
+
+\end{document}

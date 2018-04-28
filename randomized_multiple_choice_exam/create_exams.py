@@ -3,6 +3,8 @@ import csv
 import random
 import sys
 
+from jinja2 import Environment, FileSystemLoader
+
 def parse_error(n, filename, row):
     print('PARSE ERROR: Line %d of file "%s" seems problematic ("%s")' %
         (n, filename, str(row)))
@@ -50,4 +52,16 @@ if __name__ == '__main__':
 
     questions = read_questions(args.questions_file)
     random.seed(args.seed)
-    
+
+    shuffled = questions[:]
+    random.shuffle(shuffled)
+    for i, q in enumerate(shuffled):
+        q['idx'] = i + 1
+        q['answers'] = q['correct'] + q['wrong']
+        random.shuffle(q['answers'])
+
+    env = Environment(
+        loader=FileSystemLoader('templates'),
+    )
+    tpl = env.get_template('template.tex')
+    print(tpl.render(questions=shuffled))
