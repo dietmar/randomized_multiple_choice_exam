@@ -1,5 +1,6 @@
-\documentclass[a4wide]{article}
+\documentclass[a4paper]{article}
 
+\usepackage{fullpage}
 \usepackage{amssymb}
 \usepackage{enumitem}
 
@@ -8,9 +9,14 @@
 
 \begin{document}
 
-{% for q in questions %}
+{% if title %}
+\section*{
+{{ title }}
+}
+{% endif %}
 
-\section*{Question {{ q['idx'] }}}
+{% for q in questions %}
+\subsection*{Question {{ q['idx'] }}}
 
 {{ q['question'] }}
 

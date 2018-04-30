@@ -16,8 +16,8 @@ Wrong Answer,Elephants are insects.
 Wrong Answer,Parrots are mammals.
 Wrong Answer,Giraffes are reptiles.
 ,
-Question,7 times 4 equals
-Correct Answer,28
+Question,$\sqrt{(7 \cdot 4)^2}$ equals
+Correct Answer,$\pm 28$
 Wrong Answer,27
 Wrong Answer,29
 Wrong Answer,7
