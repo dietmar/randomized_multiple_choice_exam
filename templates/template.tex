@@ -9,22 +9,20 @@
 
 \begin{document}
 
-{% if title %}
-\section*{
-{{ title }}
-}
-{% endif %}
+\BLOCK{ if title }
+\section*{\VAR{title}}
+\BLOCK{ endif }
 
-{% for q in questions %}
-\subsection*{Question {{ q['idx'] }}}
+\BLOCK{ for q in questions }
+\subsection*{Question \VAR{q['idx']}}
 
-{{ q['question'] }}
+\VAR{q['question']}
 
 \begin{answerlist}
-    {% for a in q['answers'] %}
-    \item {{ a }}
-    {% endfor %}
+    \BLOCK{ for a in q['answers'] }
+    \item \VAR{a}
+    \BLOCK{ endfor }
 \end{answerlist}
-{% endfor %}
+\BLOCK{ endfor }
 
 \end{document}
