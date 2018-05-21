@@ -100,7 +100,9 @@ if __name__ == '__main__':
                 questions=shuffled,
                 title=args.title,
                 date=args.date,
+                exam_num=i,
             ))
 
         # compile to PDF
+        subprocess.call(['pdflatex', '-output-directory', PDFDIR, texfile])
         subprocess.call(['pdflatex', '-output-directory', PDFDIR, texfile])

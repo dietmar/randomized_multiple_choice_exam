@@ -1,9 +1,16 @@
 \documentclass[a4paper]{article}
-
-\usepackage{fullpage}
+\usepackage[vmargin=3cm,hmargin=2cm,headheight=12pt]{geometry}
 \usepackage{amssymb}
 \usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx}
 
+\pagestyle{fancy}
+\lhead{Machine Learning 2 Exam}
+\chead{\VAR{date}}
+\rhead{Exam \VAR{exam_num}}
+\cfoot{Page \thepage{} of \pageref{LastPage}}
 \newlist{answerlist}{enumerate}{2}
 \setlist[answerlist]{label={\scriptsize \arabic*} \raisebox{-1mm}{\Large$\square$}\hspace{1mm}, wide=0pt, leftmargin=*}
 
