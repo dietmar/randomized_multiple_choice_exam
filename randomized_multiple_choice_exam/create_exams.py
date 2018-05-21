@@ -54,6 +54,7 @@ def read_questions(filename):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--title', default='')
+    parser.add_argument('-d', '--date', default='')
     parser.add_argument('-n', type=int, default=1,
         help='Number of exams to generate')
     parser.add_argument('--seed', type=int, default=None, help='Random seed')
@@ -95,7 +96,11 @@ if __name__ == '__main__':
         tpl = env.get_template('template.tex')
         texfile = os.path.join(TEXDIR, 'exam_%d.tex' % i)
         with open(texfile, 'w') as f:
-            f.write(tpl.render(questions=shuffled, title=args.title))
+            f.write(tpl.render(
+                questions=shuffled,
+                title=args.title,
+                date=args.date,
+            ))
 
         # compile to PDF
         subprocess.call(['pdflatex', '-output-directory', PDFDIR, texfile])

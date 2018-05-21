@@ -4,14 +4,22 @@
 \usepackage{amssymb}
 \usepackage{enumitem}
 
-\newlist{answerlist}{itemize}{2}
-\setlist[answerlist]{label=$\square$}
+\newlist{answerlist}{enumerate}{2}
+\setlist[answerlist]{label={\scriptsize \arabic*} \raisebox{-1mm}{\Large$\square$}\hspace{1mm}, wide=0pt, leftmargin=*}
 
 \begin{document}
 
 \BLOCK{ if title }
 \section*{\VAR{title}}
 \BLOCK{ endif }
+
+\BLOCK{ if date }
+\subsection*{\VAR{date}}
+\BLOCK{ endif }
+
+\vspace{5mm}
+Name: \rule[-1mm]{7cm}{1pt}
+\vspace{5mm}
 
 \BLOCK{ for q in questions }
 \subsection*{Question \VAR{q['idx']}}
