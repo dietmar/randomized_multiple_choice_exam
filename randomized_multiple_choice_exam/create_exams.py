@@ -23,7 +23,7 @@ def read_questions(filename):
         csvr = csv.reader(csvfile)
         for i, row in enumerate(csvr):
             # skip empty rows (first cell empty)
-            if len(row[0]) == 0:
+            if len(row) == 0 or len(row[0]) == 0:
                 continue
             elif row[0] == 'Question':
                 # store current question
