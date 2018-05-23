@@ -1,0 +1,4 @@
+name: rmce
+dependencies:
+  - python==3.6.5
+  - Jinja2==2.10
