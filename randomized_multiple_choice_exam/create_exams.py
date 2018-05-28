@@ -55,6 +55,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--title', default='')
     parser.add_argument('-d', '--date', default='')
+    parser.add_argument('-i', '--introtext', default='')
     parser.add_argument('-n', type=int, default=1,
         help='Number of exams to generate')
     parser.add_argument('--seed', type=int, default=None, help='Random seed')
@@ -99,6 +100,7 @@ if __name__ == '__main__':
             f.write(tpl.render(
                 questions=shuffled,
                 title=args.title,
+                introtext=args.introtext,
                 date=args.date,
                 exam_num=i,
             ))
