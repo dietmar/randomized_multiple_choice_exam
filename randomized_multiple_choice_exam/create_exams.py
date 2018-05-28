@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
         # generate .tex files
         tpl = env.get_template('template.tex')
-        texfile = os.path.join(TEXDIR, 'exam_%d.tex' % i)
+        texfile = os.path.join(TEXDIR, 'exam_%03d.tex' % i)
         with open(texfile, 'w') as f:
             f.write(tpl.render(
                 questions=shuffled,
