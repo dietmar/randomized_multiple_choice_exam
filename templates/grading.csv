@@ -1,0 +1,16 @@
+\BLOCK{ for e in exams }
+\BLOCK{ set outer_loop = loop }
+Exam \VAR{ outer_loop.index }
+Student name:
+Question,Correct Answer,Student Answer,Correct,Text of correct answer
+\BLOCK{ for q in e }
+\BLOCK{ set rownum = outer_loop.index0 * (e|length + 4) + loop.index + 3 }
+Question \VAR{ loop.index },\VAR{ q['correct_index'] },,=B\VAR{ rownum }=C\VAR{ rownum },"\VAR{ q['answers'][q['correct_index']-1]['answer'] }"
+\BLOCK{ endfor }
+
+\BLOCK{ endfor }
+
+Totals,Name,# Correct
+\BLOCK{ for e in exams }
+Exam \VAR{ loop.index },=B\VAR{ loop.index0 * (e|length + 4) + 2},=SUM(D\VAR{loop.index0 * (e|length + 4) + 4}:D\VAR{loop.index * (e|length + 4) - 1}),
+\BLOCK{ endfor }

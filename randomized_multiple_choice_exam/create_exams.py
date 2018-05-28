@@ -1,4 +1,5 @@
 import argparse
+import copy
 import csv
 import os
 import random
@@ -37,12 +38,18 @@ def read_questions(filename):
                 }
             elif row[0] == 'Correct Answer':
                 if q:
-                    q['correct'].append(row[1])
+                    q['correct'].append({
+                        'answer': row[1],
+                        'correct': True,
+                    })
                 else:
                     parse_error(i+1, filename, row)
             elif row[0] == 'Wrong Answer':
                     if q:
-                        q['wrong'].append(row[1])
+                        q['wrong'].append({
+                            'answer': row[1],
+                            'correct': False,
+                        })
                     else:
                         parse_error(i+1, filename, row)
             else:
@@ -85,13 +92,18 @@ if __name__ == '__main__':
     if not os.path.exists(PDFDIR):
         os.mkdir(PDFDIR)
 
+    exams = []
     for i in range(1, args.n + 1):
-        shuffled = questions[:]
+        shuffled = copy.deepcopy(questions)
         random.shuffle(shuffled)
         for j, q in enumerate(shuffled):
             q['idx'] = j + 1
             q['answers'] = q['correct'] + q['wrong']
             random.shuffle(q['answers'])
+            for k, a in enumerate(q['answers']):
+                if a['correct']:
+                    q['correct_index'] = k + 1
+                    print('question %d: correct: index %d, "%s"' % (j + 1, k + 1, a['answer']))
 
         # generate .tex files
         tpl = env.get_template('template.tex')
@@ -108,3 +120,12 @@ if __name__ == '__main__':
         # compile to PDF
         subprocess.call(['pdflatex', '-output-directory', PDFDIR, texfile])
         subprocess.call(['pdflatex', '-output-directory', PDFDIR, texfile])
+
+        exams.append(shuffled)
+
+    # prepare grading CSV
+    tpl = env.get_template('grading.csv')
+    with open('grading.csv', 'w') as f:
+        f.write(tpl.render(
+            exams=exams,
+        ))
