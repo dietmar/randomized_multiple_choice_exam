@@ -60,6 +60,7 @@ def read_questions(filename):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('-l', '--lang', default='en')
     parser.add_argument('-t', '--title', default='')
     parser.add_argument('-d', '--date', default='')
     parser.add_argument('-i', '--introtext', default='')
@@ -106,7 +107,7 @@ if __name__ == '__main__':
                     print('question %d: correct: index %d, "%s"' % (j + 1, k + 1, a['answer']))
 
         # generate .tex files
-        tpl = env.get_template('template.tex')
+        tpl = env.get_template('template_%s.tex' % args.lang)
         texfile = os.path.join(TEXDIR, 'exam_%03d.tex' % i)
         with open(texfile, 'w') as f:
             f.write(tpl.render(

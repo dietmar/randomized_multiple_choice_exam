@@ -1,0 +1,54 @@
+\documentclass[a4paper]{article}
+\usepackage[vmargin=3cm,hmargin=2cm,headheight=12pt]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{bm}
+
+\def\HiLi{\leavevmode\rlap{\hbox to 0.3\hsize{\color{yellow!50}\leaders\hrule height .8\baselineskip depth .5ex\hfill}}}
+
+\pagestyle{fancy}
+\lhead{\VAR{title}}
+\chead{\VAR{date}}
+\rhead{Exam \VAR{exam_num}}
+\cfoot{Seite \thepage{} von \pageref{LastPage}}
+\newlist{answerlist}{enumerate}{2}
+\setlist[answerlist]{label={\scriptsize \arabic*} \raisebox{-1mm}{\Large$\square$}\hspace{1mm}, wide=0pt, leftmargin=*}
+
+\begin{document}
+
+\BLOCK{ if title }
+\section*{\VAR{title}}
+\BLOCK{ endif }
+
+\BLOCK{ if date }
+\subsection*{\VAR{date}}
+\BLOCK{ endif }
+
+\vspace{5mm}
+Name: \rule[-1mm]{7cm}{1pt}
+\vspace{5mm}
+
+\noindent
+\VAR{introtext}
+
+\BLOCK{ for q in questions }
+\subsection*{Frage \VAR{q['idx']}}
+
+\VAR{q['question']}
+
+\begin{answerlist}
+    \BLOCK{ for a in q['answers'] }
+    \item \VAR{a['answer']}
+    \BLOCK{ endfor }
+\end{answerlist}
+\BLOCK{ endfor }
+
+\end{document}
