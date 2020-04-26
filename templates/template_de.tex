@@ -1,5 +1,5 @@
-\documentclass[a4paper]{article}
-\usepackage[vmargin=3cm,hmargin=2cm,headheight=12pt]{geometry}
+\documentclass[a4paper,14pt]{extarticle}
+\usepackage[landscape,vmargin=3cm,hmargin=2cm,headheight=12pt]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage[T1]{fontenc}
@@ -11,33 +11,35 @@
 \usepackage{algpseudocode}
 \usepackage{xcolor}
 \usepackage{bm}
+\usepackage{palatino}
 
 \def\HiLi{\leavevmode\rlap{\hbox to 0.3\hsize{\color{yellow!50}\leaders\hrule height .8\baselineskip depth .5ex\hfill}}}
 
-\pagestyle{fancy}
-\lhead{\VAR{title}}
-\chead{\VAR{date}}
-\rhead{Exam \VAR{exam_num}}
-\cfoot{Seite \thepage{} von \pageref{LastPage}}
+\pagestyle{empty}
+%\pagestyle{fancy}
+%\lhead{\small \VAR{title}}
+%\chead{\small \VAR{date}}
+%\rhead{\small Exam \VAR{exam_num}}
+%\cfoot{\small Seite \thepage{} von \pageref{LastPage}}
 \newlist{answerlist}{enumerate}{2}
-\setlist[answerlist]{label={\scriptsize \arabic*} \raisebox{-1mm}{\Large$\square$}\hspace{1mm}, wide=0pt, leftmargin=*}
+\setlist[answerlist]{label={\Alph*}) }
 
 \begin{document}
 
-\BLOCK{ if title }
-\section*{\VAR{title}}
-\BLOCK{ endif }
+%\BLOCK{ if title }
+%\section*{\VAR{title}}
+%\BLOCK{ endif }
 
-\BLOCK{ if date }
-\subsection*{\VAR{date}}
-\BLOCK{ endif }
+%\BLOCK{ if date }
+%\subsection*{\VAR{date}}
+%\BLOCK{ endif }
 
-\vspace{5mm}
-Name: \rule[-1mm]{7cm}{1pt}
-\vspace{5mm}
+%\vspace{5mm}
+%Name: \rule[-1mm]{7cm}{1pt}
+%\vspace{5mm}
 
-\noindent
-\VAR{introtext}
+%\noindent
+%\VAR{introtext}
 
 \BLOCK{ for q in questions }
 \subsection*{Frage \VAR{q['idx']}}
@@ -49,6 +51,7 @@ Name: \rule[-1mm]{7cm}{1pt}
     \item \VAR{a['answer']}
     \BLOCK{ endfor }
 \end{answerlist}
+\newpage
 \BLOCK{ endfor }
 
 \end{document}

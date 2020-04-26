@@ -66,12 +66,17 @@ if __name__ == '__main__':
     parser.add_argument('-i', '--introtext', default='')
     parser.add_argument('-n', type=int, default=1,
         help='Number of exams to generate')
+    parser.add_argument('-m', type=int, default=-1,
+        help='Number of questions per exam')
     parser.add_argument('--seed', type=int, default=None, help='Random seed')
     parser.add_argument('questions_file')
     args = parser.parse_args()
 
     questions = read_questions(args.questions_file)
     random.seed(args.seed)
+
+    if args.m < 1 or args.m > len(questions):
+        args.m = len(questions)
 
     # http://eosrei.net/articles/2015/11/latex-templates-python-and-jinja2-generate-pdfs
     env = Environment(
@@ -97,6 +102,7 @@ if __name__ == '__main__':
     for i in range(1, args.n + 1):
         shuffled = copy.deepcopy(questions)
         random.shuffle(shuffled)
+        shuffled = shuffled[0:args.m]
         for j, q in enumerate(shuffled):
             q['idx'] = j + 1
             q['answers'] = q['correct'] + q['wrong']
